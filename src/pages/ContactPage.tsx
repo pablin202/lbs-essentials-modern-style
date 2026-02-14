@@ -41,8 +41,8 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-foreground mb-1">Instagram</h3>
-                    <a href="https://instagram.com/lbsessentials" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                      @lbsessentials
+                    <a href="https://www.instagram.com/lbs.essentials/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                      @lbs.essentials
                     </a>
                     <p className="text-xs text-muted-foreground mt-1">DM us anytime for quick questions.</p>
                   </div>

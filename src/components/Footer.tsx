@@ -34,7 +34,7 @@ const Footer = () => {
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase font-medium mb-4 opacity-80">Connect</h4>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/lbs.essentials/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm opacity-70 hover:opacity-100 transition-opacity"
