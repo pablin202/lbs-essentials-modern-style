@@ -10,24 +10,28 @@ const collections = [
     subtitle: "Work & Weekend",
     image: collectionTotes,
     alt: "Model carrying a structured beige tote bag in a modern city setting",
+    to: "/collection/totes-work-bags",
   },
   {
     title: "Crossbody",
     subtitle: "Hands-Free Style",
     image: collectionCrossbody,
     alt: "Model wearing a taupe crossbody bag in a minimalist cafe",
+    to: "/collection/crossbody-bags",
   },
   {
     title: "Shoulder Bags",
     subtitle: "Effortless Everyday",
     image: collectionShoulder,
     alt: "Model with a black shoulder bag in a bright modern apartment",
+    to: "/collection/everyday-bags",
   },
   {
     title: "Mini Bags",
     subtitle: "Evening & Beyond",
     image: collectionMini,
     alt: "Model holding a blush pink mini bag at golden hour on a rooftop",
+    to: "/collection/evening-mini-bags",
   },
 ];
 
@@ -47,7 +51,7 @@ const CollectionShowcase = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {collections.map((collection) => (
             <Link
-              to={`/#collection`}
+              to={collection.to}
               key={collection.title}
               className="group relative overflow-hidden rounded-sm"
             >
