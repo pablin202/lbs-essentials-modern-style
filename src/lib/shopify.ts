@@ -174,6 +174,60 @@ const PRODUCT_BY_HANDLE_QUERY = `
   }
 `;
 
+const COLLECTION_BY_HANDLE_QUERY = `
+  query GetCollectionByHandle($handle: String!, $first: Int!) {
+    collectionByHandle(handle: $handle) {
+      id
+      title
+      products(first: $first) {
+        edges {
+          node {
+            id
+            title
+            description
+            handle
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+            images(first: 5) {
+              edges {
+                node {
+                  url
+                  altText
+                }
+              }
+            }
+            variants(first: 10) {
+              edges {
+                node {
+                  id
+                  title
+                  price {
+                    amount
+                    currencyCode
+                  }
+                  availableForSale
+                  selectedOptions {
+                    name
+                    value
+                  }
+                }
+              }
+            }
+            options {
+              name
+              values
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 export async function fetchProducts(first = 24, query?: string): Promise<ShopifyProduct[]> {
   const data = await storefrontApiRequest(PRODUCTS_QUERY, { first, query });
   return data?.data?.products?.edges || [];
@@ -182,4 +236,10 @@ export async function fetchProducts(first = 24, query?: string): Promise<Shopify
 export async function fetchProductByHandle(handle: string): Promise<ShopifyProduct['node'] | null> {
   const data = await storefrontApiRequest(PRODUCT_BY_HANDLE_QUERY, { handle });
   return data?.data?.productByHandle || null;
+}
+
+export async function fetchCollectionByHandle(handle: string, first = 8): Promise<ShopifyProduct[]> {
+  const data = await storefrontApiRequest(COLLECTION_BY_HANDLE_QUERY, { handle, first });
+  const products = data?.data?.collectionByHandle?.products?.edges || [];
+  return products.map((edge: { node: ShopifyProduct['node'] }) => ({ node: edge.node }));
 }
