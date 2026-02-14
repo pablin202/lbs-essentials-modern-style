@@ -70,7 +70,7 @@ const Navbar = () => {
             )}
           </li>
 
-          <li><Link to="/#journal" className="hover:text-foreground transition-colors">Everyday Style Journal</Link></li>
+          <li><Link to="/journal" className="hover:text-foreground transition-colors">Everyday Style Journal</Link></li>
 
           {/* Customer Service dropdown */}
           <li ref={serviceRef} className="relative">
