@@ -1,17 +1,21 @@
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const articles = [
   {
+    slug: "how-to-choose-the-perfect-everyday-bag",
     title: "How to Choose the Perfect Everyday Bag",
     excerpt: "From size and shape to strap style — a simple guide to finding the bag that fits your daily life.",
     category: "Guide",
   },
   {
+    slug: "best-bag-colors-for-daily-wear",
     title: "Best Bag Colors for Daily Wear",
     excerpt: "Neutral, bold, or somewhere in between? Find out which shades work hardest in your wardrobe.",
     category: "Style",
   },
   {
+    slug: "tote-vs-crossbody-which-one-fits-your-lifestyle",
     title: "Tote vs Crossbody: Which One Fits Your Lifestyle",
     excerpt: "We break down the pros and cons so you can pick the perfect silhouette for your routine.",
     category: "Comparison",
@@ -31,9 +35,10 @@ const JournalSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {articles.map((article) => (
-            <article
-              key={article.title}
-              className="bg-background rounded-sm p-6 md:p-8 group cursor-pointer hover:shadow-md transition-shadow duration-300"
+            <Link
+              to={`/journal/${article.slug}`}
+              key={article.slug}
+              className="bg-background rounded-sm p-6 md:p-8 group cursor-pointer hover:shadow-md transition-shadow duration-300 block"
             >
               <span className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground font-medium">
                 {article.category}
@@ -47,8 +52,17 @@ const JournalSection = () => {
               <span className="inline-flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase text-foreground group-hover:gap-2.5 transition-all">
                 Read More <ArrowRight size={13} />
               </span>
-            </article>
+            </Link>
           ))}
+        </div>
+
+        <div className="text-center mt-10">
+          <Link
+            to="/journal"
+            className="inline-block border border-foreground text-foreground px-8 py-3 text-sm font-medium tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors"
+          >
+            View All Articles
+          </Link>
         </div>
       </div>
     </section>
