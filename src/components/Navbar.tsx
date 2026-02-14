@@ -11,11 +11,11 @@ const catalogLinks = [
   { label: "All", to: "/collection/all" },
 ];
 
-const customerServiceLinks = [
+const customerServiceLinks: { label: string; to: string; external?: boolean }[] = [
   { label: "Contact Us", to: "/contact" },
   { label: "FAQ", to: "/#faq" },
   { label: "Shipping & Handling", to: "/#faq" },
-  { label: "Track Your Order", to: "/contact" },
+  { label: "Track Your Order", to: "https://lbsessentials.com/apps/17TRACK", external: true },
 ];
 
 const Navbar = () => {
@@ -83,7 +83,7 @@ const Navbar = () => {
             {serviceOpen && (
               <div className="absolute top-full left-0 mt-2 w-52 bg-background border border-border rounded-sm shadow-lg py-2">
                 {customerServiceLinks.map((link) => (
-                  <a key={link.label} href={link.to} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors">
+                  <a key={link.label} href={link.to} {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-colors">
                     {link.label}
                   </a>
                 ))}
@@ -121,7 +121,7 @@ const Navbar = () => {
             <li className="pt-2 border-t border-border mt-2">
               <p className="py-2 text-xs tracking-[0.2em] uppercase text-muted-foreground/60">Customer Service</p>
               {customerServiceLinks.map((link) => (
-                <a key={link.label} href={link.to} onClick={() => setMobileOpen(false)} className="block py-2 pl-3 hover:text-foreground transition-colors">
+                <a key={link.label} href={link.to} {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} onClick={() => setMobileOpen(false)} className="block py-2 pl-3 hover:text-foreground transition-colors">
                   {link.label}
                 </a>
               ))}
