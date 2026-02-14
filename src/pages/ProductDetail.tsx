@@ -25,6 +25,19 @@ const ProductDetail = () => {
       .finally(() => setLoading(false));
   }, [handle]);
 
+  // Update selected image when variant changes (if variant has an associated image)
+  const selectedVariant = product?.variants.edges[selectedVariantIndex]?.node;
+  useEffect(() => {
+    if (!product || !selectedVariant?.image?.url) return;
+    const images = product.images.edges;
+    const matchingIndex = images.findIndex(
+      (img) => img.node.url === selectedVariant.image!.url
+    );
+    if (matchingIndex >= 0 && matchingIndex !== selectedImage) {
+      setSelectedImage(matchingIndex);
+    }
+  }, [selectedVariantIndex, selectedVariant, product]);
+
   const handleAddToCart = async () => {
     if (!product) return;
     const variant = product.variants.edges[selectedVariantIndex]?.node;
@@ -65,7 +78,6 @@ const ProductDetail = () => {
   }
 
   const images = product.images.edges;
-  const selectedVariant = product.variants.edges[selectedVariantIndex]?.node;
 
   return (
     <div className="min-h-screen bg-background">
