@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ShoppingBag, Menu, X } from "lucide-react";
+import { CartDrawer } from "./CartDrawer";
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -11,7 +12,6 @@ const Navbar = () => {
           LBS Essentials
         </a>
 
-        {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide text-muted-foreground">
           <li><a href="#collection" className="hover:text-foreground transition-colors">Shop</a></li>
           <li><a href="#journal" className="hover:text-foreground transition-colors">Journal</a></li>
@@ -20,17 +20,13 @@ const Navbar = () => {
         </ul>
 
         <div className="flex items-center gap-4">
-          <button className="relative text-foreground hover:text-muted-foreground transition-colors" aria-label="Cart">
-            <ShoppingBag size={20} />
-            <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] flex items-center justify-center font-medium">0</span>
-          </button>
+          <CartDrawer />
           <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </nav>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-background border-t border-border">
           <ul className="flex flex-col py-4 section-padding gap-4 text-sm font-medium text-muted-foreground">
