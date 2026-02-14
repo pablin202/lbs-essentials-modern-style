@@ -1,26 +1,39 @@
-import { ShoppingBag } from "lucide-react";
-
-import productTote1 from "@/assets/product-tote-1.jpg";
-import productCrossbody1 from "@/assets/product-crossbody-1.jpg";
-import productSmallBag1 from "@/assets/product-small-bag-1.jpg";
-import productShoulder1 from "@/assets/product-shoulder-1.jpg";
-import productMini1 from "@/assets/product-mini-1.jpg";
-import productTote2 from "@/assets/product-tote-2.jpg";
-import productCrossbody2 from "@/assets/product-crossbody-2.jpg";
-import productEveryday1 from "@/assets/product-everyday-1.jpg";
-
-const products = [
-  { name: "The Classic Tote", price: 68, image: productTote1, tag: "Bestseller" },
-  { name: "The Crossbody", price: 52, image: productCrossbody1 },
-  { name: "The Noir Mini", price: 45, image: productSmallBag1 },
-  { name: "The Blush Shoulder", price: 58, image: productShoulder1, tag: "New" },
-  { name: "The Grey Top Handle", price: 62, image: productMini1 },
-  { name: "The Camel Tote", price: 72, image: productTote2 },
-  { name: "The Chain Crossbody", price: 48, image: productCrossbody2 },
-  { name: "The Olive Everyday", price: 65, image: productEveryday1 },
-];
+import { useEffect, useState } from "react";
+import { ShoppingBag, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { fetchProducts, type ShopifyProduct } from "@/lib/shopify";
+import { useCartStore } from "@/stores/cartStore";
+import { toast } from "sonner";
 
 const FeaturedCollection = () => {
+  const [products, setProducts] = useState<ShopifyProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+  const addItem = useCartStore((s) => s.addItem);
+  const isCartLoading = useCartStore((s) => s.isLoading);
+
+  useEffect(() => {
+    fetchProducts(8)
+      .then(setProducts)
+      .catch(console.error)
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleAddToCart = async (e: React.MouseEvent, product: ShopifyProduct) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const variant = product.node.variants.edges[0]?.node;
+    if (!variant) return;
+    await addItem({
+      product,
+      variantId: variant.id,
+      variantTitle: variant.title,
+      price: variant.price,
+      quantity: 1,
+      selectedOptions: variant.selectedOptions || [],
+    });
+    toast.success("Added to bag", { description: product.node.title });
+  };
+
   return (
     <section id="collection" className="py-20 md:py-28 section-padding">
       <div className="max-w-7xl mx-auto">
@@ -31,33 +44,56 @@ const FeaturedCollection = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-          {products.map((product) => (
-            <div key={product.name} className="group cursor-pointer">
-              <div className="relative aspect-square bg-secondary rounded-sm overflow-hidden mb-3">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                {product.tag && (
-                  <span className="absolute top-3 left-3 bg-primary text-primary-foreground text-[10px] tracking-widest uppercase px-2.5 py-1 font-medium">
-                    {product.tag}
-                  </span>
-                )}
-                <button
-                  className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
-                  aria-label={`Add ${product.name} to bag`}
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <Loader2 className="w-6 h-6 animate-spin text-muted-foreground" />
+          </div>
+        ) : products.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground">No products found</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {products.map((product) => {
+              const image = product.node.images.edges[0]?.node;
+              const price = product.node.priceRange.minVariantPrice;
+              return (
+                <Link
+                  to={`/product/${product.node.handle}`}
+                  key={product.node.id}
+                  className="group cursor-pointer"
                 >
-                  <ShoppingBag size={15} className="text-foreground" />
-                </button>
-              </div>
-              <h3 className="text-sm font-medium text-foreground">{product.name}</h3>
-              <p className="text-sm text-muted-foreground mt-0.5">${product.price}.00</p>
-            </div>
-          ))}
-        </div>
+                  <div className="relative aspect-square bg-secondary rounded-sm overflow-hidden mb-3">
+                    {image ? (
+                      <img
+                        src={image.url}
+                        alt={image.altText || product.node.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-muted-foreground">
+                        <ShoppingBag size={24} />
+                      </div>
+                    )}
+                    <button
+                      onClick={(e) => handleAddToCart(e, product)}
+                      disabled={isCartLoading}
+                      className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+                      aria-label={`Add ${product.node.title} to bag`}
+                    >
+                      {isCartLoading ? <Loader2 size={15} className="animate-spin text-foreground" /> : <ShoppingBag size={15} className="text-foreground" />}
+                    </button>
+                  </div>
+                  <h3 className="text-sm font-medium text-foreground">{product.node.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    ${parseFloat(price.amount).toFixed(2)} {price.currencyCode}
+                  </p>
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );
