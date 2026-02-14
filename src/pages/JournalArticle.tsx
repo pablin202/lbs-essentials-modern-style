@@ -56,6 +56,18 @@ const JournalArticle = () => {
                 if (paragraph.startsWith("*") && paragraph.includes("*:")) {
                   return <p key={i} className="text-sm italic leading-relaxed">{paragraph.replace(/\*/g, "")}</p>;
                 }
+                const linkMatch = paragraph.match(/\[([^\]]+)\]\(([^)]+)\)/);
+                if (linkMatch) {
+                  const before = paragraph.slice(0, linkMatch.index);
+                  const after = paragraph.slice((linkMatch.index || 0) + linkMatch[0].length);
+                  return (
+                    <p key={i} className="text-sm leading-relaxed">
+                      {before}
+                      <Link to={linkMatch[2]} className="underline text-foreground hover:text-foreground/80 transition-colors">{linkMatch[1]}</Link>
+                      {after}
+                    </p>
+                  );
+                }
                 return <p key={i} className="text-sm leading-relaxed">{paragraph}</p>;
               })}
             </div>
