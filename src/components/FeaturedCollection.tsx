@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ShoppingBag, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { fetchProducts, type ShopifyProduct } from "@/lib/shopify";
+import { fetchCollectionByHandle, type ShopifyProduct } from "@/lib/shopify";
 import { useCartStore } from "@/stores/cartStore";
 import { toast } from "sonner";
 
@@ -12,7 +12,7 @@ const FeaturedCollection = () => {
   const isCartLoading = useCartStore((s) => s.isLoading);
 
   useEffect(() => {
-    fetchProducts(8)
+    fetchCollectionByHandle("best-sellers", 8)
       .then(setProducts)
       .catch(console.error)
       .finally(() => setLoading(false));
