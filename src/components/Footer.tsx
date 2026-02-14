@@ -15,20 +15,19 @@ const Footer = () => {
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase font-medium mb-4 opacity-80">Shop</h4>
             <ul className="space-y-2.5 text-sm opacity-70">
-              <li><a href="#collection" className="hover:opacity-100 transition-opacity">All Bags</a></li>
-              <li><a href="#collection" className="hover:opacity-100 transition-opacity">Totes</a></li>
-              <li><a href="#collection" className="hover:opacity-100 transition-opacity">Crossbody</a></li>
-              <li><a href="#collection" className="hover:opacity-100 transition-opacity">New Arrivals</a></li>
+              <li><a href="/collection/all" className="hover:opacity-100 transition-opacity">All Bags</a></li>
+              <li><a href="/collection/totes-work-bags" className="hover:opacity-100 transition-opacity">Totes</a></li>
+              <li><a href="/collection/crossbody-bags" className="hover:opacity-100 transition-opacity">Crossbody</a></li>
+              <li><a href="/collection/evening-mini-bags" className="hover:opacity-100 transition-opacity">Mini & Evening</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase font-medium mb-4 opacity-80">Company</h4>
             <ul className="space-y-2.5 text-sm opacity-70">
-              <li><a href="#" className="hover:opacity-100 transition-opacity">About</a></li>
-              <li><a href="#journal" className="hover:opacity-100 transition-opacity">Journal</a></li>
-              <li><a href="#faq" className="hover:opacity-100 transition-opacity">FAQ</a></li>
-              <li><a href="mailto:hello@lbsessentials.com" className="hover:opacity-100 transition-opacity">Contact</a></li>
+              <li><a href="/#journal" className="hover:opacity-100 transition-opacity">Journal</a></li>
+              <li><a href="/#faq" className="hover:opacity-100 transition-opacity">FAQ</a></li>
+              <li><a href="/contact" className="hover:opacity-100 transition-opacity">Contact</a></li>
             </ul>
           </div>
 

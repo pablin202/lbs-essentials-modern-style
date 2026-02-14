@@ -12,10 +12,10 @@ const catalogLinks = [
 ];
 
 const customerServiceLinks = [
-  { label: "Contact Us", to: "/#footer" },
+  { label: "Contact Us", to: "/contact" },
   { label: "FAQ", to: "/#faq" },
   { label: "Shipping & Handling", to: "/#faq" },
-  { label: "Track Your Order", to: "/#footer" },
+  { label: "Track Your Order", to: "/contact" },
 ];
 
 const Navbar = () => {
