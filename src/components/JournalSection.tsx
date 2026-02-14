@@ -1,0 +1,58 @@
+import { ArrowRight } from "lucide-react";
+
+const articles = [
+  {
+    title: "How to Choose the Perfect Everyday Bag",
+    excerpt: "From size and shape to strap style — a simple guide to finding the bag that fits your daily life.",
+    category: "Guide",
+  },
+  {
+    title: "Best Bag Colors for Daily Wear",
+    excerpt: "Neutral, bold, or somewhere in between? Find out which shades work hardest in your wardrobe.",
+    category: "Style",
+  },
+  {
+    title: "Tote vs Crossbody: Which One Fits Your Lifestyle",
+    excerpt: "We break down the pros and cons so you can pick the perfect silhouette for your routine.",
+    category: "Comparison",
+  },
+];
+
+const JournalSection = () => {
+  return (
+    <section id="journal" className="py-20 md:py-28 bg-warm">
+      <div className="section-padding max-w-6xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-3">Everyday Style Journal</p>
+          <h2 className="text-3xl md:text-4xl font-display font-medium text-foreground">
+            Stories & Guides
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {articles.map((article) => (
+            <article
+              key={article.title}
+              className="bg-background rounded-sm p-6 md:p-8 group cursor-pointer hover:shadow-md transition-shadow duration-300"
+            >
+              <span className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground font-medium">
+                {article.category}
+              </span>
+              <h3 className="text-lg font-display font-medium text-foreground mt-3 mb-3 leading-snug">
+                {article.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                {article.excerpt}
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase text-foreground group-hover:gap-2.5 transition-all">
+                Read More <ArrowRight size={13} />
+              </span>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default JournalSection;
