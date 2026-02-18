@@ -8,6 +8,7 @@ const catalogLinks = [
   { label: "Everyday Bags", to: "/collection/everyday-bags" },
   { label: "Mini & Evening", to: "/collection/evening-mini-bags" },
   { label: "Totes & Work Bags", to: "/collection/totes-work-bags" },
+  { label: "Gold Jewelry", to: "/collection/jewelry" },
   { label: "All", to: "/collection/all" },
 ];
 

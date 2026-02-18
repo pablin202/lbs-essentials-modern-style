@@ -37,14 +37,14 @@ const collections = [
 
 const CollectionShowcase = () => {
   return (
-    <section className="py-20 md:py-28 section-padding">
+    <section className="py-24 md:py-36 section-padding">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-3">
-            Shop by Category
+        <div className="text-center mb-16">
+          <p className="text-xs tracking-[0.35em] uppercase text-muted-foreground mb-4">
+            The Edit
           </p>
           <h2 className="text-3xl md:text-4xl font-display font-medium text-foreground">
-            Find Your Everyday Bag
+            Shop by Category
           </h2>
         </div>
 
