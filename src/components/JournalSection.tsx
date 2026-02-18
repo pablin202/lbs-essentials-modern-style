@@ -24,10 +24,10 @@ const articles = [
 
 const JournalSection = () => {
   return (
-    <section id="journal" className="py-20 md:py-28 bg-warm">
+    <section id="journal" className="py-24 md:py-36 bg-warm">
       <div className="section-padding max-w-6xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-3">Everyday Style Journal</p>
+        <div className="text-center mb-16">
+          <p className="text-xs tracking-[0.35em] uppercase text-muted-foreground mb-4">The Journal</p>
           <h2 className="text-3xl md:text-4xl font-display font-medium text-foreground">
             Stories & Guides
           </h2>

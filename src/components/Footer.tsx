@@ -8,17 +8,17 @@ const Footer = () => {
           <div className="col-span-2 md:col-span-1">
             <h3 className="font-display text-lg font-medium mb-4">LBS Essentials</h3>
             <p className="text-sm opacity-70 leading-relaxed max-w-xs">
-              Everyday bags designed for real life. Practical, elegant, affordable luxury.
+              Curated bags & gold jewelry for women who value elegance, quality, and intentional living.
             </p>
           </div>
 
           <div>
             <h4 className="text-xs tracking-[0.2em] uppercase font-medium mb-4 opacity-80">Shop</h4>
             <ul className="space-y-2.5 text-sm opacity-70">
-              <li><a href="/collection/all" className="hover:opacity-100 transition-opacity">All Bags</a></li>
+              <li><a href="/collection/all" className="hover:opacity-100 transition-opacity">All Accessories</a></li>
               <li><a href="/collection/totes-work-bags" className="hover:opacity-100 transition-opacity">Totes</a></li>
               <li><a href="/collection/crossbody-bags" className="hover:opacity-100 transition-opacity">Crossbody</a></li>
-              <li><a href="/collection/evening-mini-bags" className="hover:opacity-100 transition-opacity">Mini & Evening</a></li>
+              <li><a href="/collection/jewelry" className="hover:opacity-100 transition-opacity">Gold Jewelry</a></li>
             </ul>
           </div>
 

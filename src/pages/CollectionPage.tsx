@@ -9,8 +9,8 @@ import Footer from "@/components/Footer";
 
 const COLLECTION_META: Record<string, { title: string; description: string }> = {
   "all": {
-    title: "All Products",
-    description: "Browse our full collection of everyday bags & accessories.",
+    title: "All Accessories",
+    description: "Browse our curated collection of bags & gold jewelry.",
   },
   "best-sellers": {
     title: "Best Sellers",
@@ -32,6 +32,10 @@ const COLLECTION_META: Record<string, { title: string; description: string }> = 
     title: "Evening & Mini Bags",
     description: "Small statement pieces for special moments.",
   },
+  "jewelry": {
+    title: "Gold Jewelry Capsule",
+    description: "Minimalist 18k PVD gold pieces — designed to pair with everything.",
+  },
 };
 
 const TAG_MAP: Record<string, string> = {
@@ -39,6 +43,7 @@ const TAG_MAP: Record<string, string> = {
   "everyday-bags": "everyday_bags",
   "totes-work-bags": "totes_work_bags",
   "evening-mini-bags": "mini_evening",
+  "jewelry": "jewelry",
 };
 
 const CollectionPage = () => {

@@ -35,12 +35,12 @@ const FeaturedCollection = () => {
   };
 
   return (
-    <section id="collection" className="py-20 md:py-28 section-padding">
+    <section id="collection" className="py-24 md:py-36 section-padding">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-3">Featured</p>
+        <div className="text-center mb-16">
+          <p className="text-xs tracking-[0.35em] uppercase text-muted-foreground mb-4">Curated Selection</p>
           <h2 className="text-3xl md:text-4xl font-display font-medium text-foreground">
-            The Collection
+            Our Favourites
           </h2>
         </div>
 
