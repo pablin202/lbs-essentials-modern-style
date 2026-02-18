@@ -35,12 +35,12 @@ const FeaturedCollection = () => {
   };
 
   return (
-    <section id="collection" className="py-24 md:py-36 section-padding">
+    <section id="collection" className="py-20 md:py-28 section-padding bg-warm">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.35em] uppercase text-muted-foreground mb-4">Curated Selection</p>
+        <div className="text-center mb-12">
+          <p className="text-xs tracking-[0.35em] uppercase text-muted-foreground mb-3">Most Loved</p>
           <h2 className="text-3xl md:text-4xl font-display font-medium text-foreground">
-            Our Favourites
+            Best Sellers
           </h2>
         </div>
 
@@ -57,6 +57,9 @@ const FeaturedCollection = () => {
             {products.map((product) => {
               const image = product.node.images.edges[0]?.node;
               const price = product.node.priceRange.minVariantPrice;
+              const variant = product.node.variants.edges[0]?.node;
+              const inStock = variant?.availableForSale;
+
               return (
                 <Link
                   to={`/product/${product.node.handle}`}
@@ -76,24 +79,39 @@ const FeaturedCollection = () => {
                         <ShoppingBag size={24} />
                       </div>
                     )}
+                    {/* Stock badge */}
+                    {inStock !== undefined && (
+                      <span className={`absolute top-2 left-2 text-[10px] font-medium tracking-wide uppercase px-2 py-0.5 rounded-sm ${inStock ? "bg-background/90 text-foreground" : "bg-destructive text-destructive-foreground"}`}>
+                        {inStock ? "In Stock" : "Sold Out"}
+                      </span>
+                    )}
                     <button
                       onClick={(e) => handleAddToCart(e, product)}
-                      disabled={isCartLoading}
-                      className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background"
+                      disabled={isCartLoading || !inStock}
+                      className="absolute bottom-3 right-3 w-9 h-9 rounded-full bg-background/90 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-background disabled:opacity-50"
                       aria-label={`Add ${product.node.title} to bag`}
                     >
                       {isCartLoading ? <Loader2 size={15} className="animate-spin text-foreground" /> : <ShoppingBag size={15} className="text-foreground" />}
                     </button>
                   </div>
                   <h3 className="text-sm font-medium text-foreground">{product.node.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-0.5">
-                    ${parseFloat(price.amount).toFixed(2)} {price.currencyCode}
+                  <p className="text-sm font-medium text-foreground mt-0.5">
+                    ${parseFloat(price.amount).toFixed(2)} <span className="text-muted-foreground font-normal">{price.currencyCode}</span>
                   </p>
                 </Link>
               );
             })}
           </div>
         )}
+
+        <div className="text-center mt-10">
+          <Link
+            to="/collection/all"
+            className="inline-block border border-foreground text-foreground px-8 py-3 text-xs font-medium tracking-[0.2em] uppercase hover:bg-foreground hover:text-background transition-colors"
+          >
+            View All Products
+          </Link>
+        </div>
       </div>
     </section>
   );

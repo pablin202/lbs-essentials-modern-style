@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Search, User } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { CartDrawer } from "./CartDrawer";
 
@@ -15,7 +15,7 @@ const catalogLinks = [
 const customerServiceLinks: { label: string; to: string; external?: boolean }[] = [
   { label: "Contact Us", to: "/contact" },
   { label: "FAQ", to: "/#faq" },
-  { label: "Shipping & Handling", to: "/#faq" },
+  { label: "Shipping & Returns", to: "/#faq" },
   { label: "Track Your Order", to: "https://lbsessentials.com/apps/17TRACK", external: true },
 ];
 
@@ -71,7 +71,7 @@ const Navbar = () => {
             )}
           </li>
 
-          <li><Link to="/journal" className="hover:text-foreground transition-colors">Everyday Style Journal</Link></li>
+          <li><Link to="/journal" className="hover:text-foreground transition-colors">Journal</Link></li>
 
           {/* Customer Service dropdown */}
           <li ref={serviceRef} className="relative">
@@ -79,7 +79,7 @@ const Navbar = () => {
               onClick={() => { setServiceOpen(!serviceOpen); setCatalogOpen(false); }}
               className="flex items-center gap-1 hover:text-foreground transition-colors"
             >
-              Customer Service <ChevronDown size={14} className={`transition-transform ${serviceOpen ? "rotate-180" : ""}`} />
+              Help <ChevronDown size={14} className={`transition-transform ${serviceOpen ? "rotate-180" : ""}`} />
             </button>
             {serviceOpen && (
               <div className="absolute top-full left-0 mt-2 w-52 bg-background border border-border rounded-sm shadow-lg py-2">
@@ -93,7 +93,13 @@ const Navbar = () => {
           </li>
         </ul>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <button className="hidden md:flex text-muted-foreground hover:text-foreground transition-colors" aria-label="Search">
+            <Search size={20} />
+          </button>
+          <button className="hidden md:flex text-muted-foreground hover:text-foreground transition-colors" aria-label="Account">
+            <User size={20} />
+          </button>
           <CartDrawer />
           <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Menu">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -116,11 +122,11 @@ const Navbar = () => {
             </li>
 
             <li className="pt-2 border-t border-border mt-2">
-              <Link to="/#journal" className="block py-2 hover:text-foreground transition-colors">Everyday Style Journal</Link>
+              <Link to="/journal" className="block py-2 hover:text-foreground transition-colors">Journal</Link>
             </li>
 
             <li className="pt-2 border-t border-border mt-2">
-              <p className="py-2 text-xs tracking-[0.2em] uppercase text-muted-foreground/60">Customer Service</p>
+              <p className="py-2 text-xs tracking-[0.2em] uppercase text-muted-foreground/60">Help</p>
               {customerServiceLinks.map((link) => (
                 <a key={link.label} href={link.to} {...('external' in link && link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} onClick={() => setMobileOpen(false)} className="block py-2 pl-3 hover:text-foreground transition-colors">
                   {link.label}
