@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import collectionTotes from "@/assets/collection-totes.jpg";
-import collectionMini from "@/assets/collection-mini.jpg";
+import collectionJewelry from "@/assets/collection-jewelry.jpg";
 
 const collections = [
   {
@@ -13,7 +13,7 @@ const collections = [
   {
     title: "Gold Jewelry",
     subtitle: "18k PVD · Tarnish-Resistant",
-    image: collectionMini,
+    image: collectionJewelry,
     alt: "Minimalist gold-plated jewelry capsule collection",
     to: "/collection/jewelry",
   },
